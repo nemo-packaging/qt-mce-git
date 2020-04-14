@@ -2,8 +2,8 @@
 # Contributor: Alexey Andreyev <aa13q@ya.ru>
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
-pkgname=qt-mce-git
-_srcname=qt-mce
+pkgname=qt5-mce-git
+_pkgname=qt-mce-git
 pkgver=1.4.2.r0.g431168d
 pkgrel=1
 _project=mer-core
@@ -15,14 +15,14 @@ license=('BSD-3-Clause')
 depends=('qt5-base' 'qt5-declarative')
 makedepends=('git' 'mce-git')
 optdepends=()
-provides=("${_srcname}")
-conflicts=()
+provides=("${pkgname}-git" "${_pkgname}-git")
+conflicts=("${pkgname}-git" "${_pkgname}-git")
 source=(
-  "${pkgname}::git+${url}")
+  "${_pkgname}::git+${url}")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "${srcdir}/${pkgname}"
+  cd "${srcdir}/${_pkgname}"
   ( set -o pipefail
     git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
@@ -30,7 +30,7 @@ pkgver() {
 }
 
 build() {
-  cd "${srcdir}/${pkgname}"
+  cd "${srcdir}/${_pkgname}"
   mkdir -p build
   cd build
   qmake ..
@@ -38,7 +38,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${pkgname}"
+  cd "${srcdir}/${_pkgname}"
   cd build
   make INSTALL_ROOT="${pkgdir}" install
 }
