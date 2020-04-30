@@ -12,7 +12,7 @@ pkgdesc="A library of Qt bindings for mce"
 arch=('x86_64' 'aarch64')
 url="https://git.sailfishos.org/$_project/libmce-qt#branch=$_branch"
 license=('BSD-3-Clause')
-depends=('qt5-base' 'qt5-declarative')
+depends=('qt5-declarative')
 makedepends=('git' 'mce-git')
 optdepends=()
 provides=("${pkgname}-git" "${_pkgname}-git")
